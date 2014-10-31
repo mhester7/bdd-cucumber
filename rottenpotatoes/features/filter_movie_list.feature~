@@ -31,6 +31,9 @@ Scenario: restrict to movies with 'PG' or 'R' ratings
   	And the "ratings[G]" checkbox should not be checked
   	And the "ratings[PG-13]" checkbox should not be checked
   	And the "ratings[NC-17]" checkbox should not be checked
+  	And I should see "Aladdin"
+  	And I should see "The Terminator"
+  	And I should see "When Harry Met Sally"
   # enter step to "submit" the search form on the homepage
   # enter step(s) to ensure that PG and R movies are visible
   # enter step(s) to ensure that other movies are not visible
