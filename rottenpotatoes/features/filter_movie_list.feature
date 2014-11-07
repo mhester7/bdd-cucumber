@@ -43,6 +43,8 @@ Scenario: restrict to movies with 'PG' or 'R' ratings
 		But I should not see "Chicken Run"
 
 
+
+
 Scenario: all ratings selected
 	When I check the following ratings: G, PG, PG-13, R, NC-17
 		And I press "Refresh"
