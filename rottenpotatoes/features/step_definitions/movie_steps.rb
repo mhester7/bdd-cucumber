@@ -1,40 +1,41 @@
-# Add a declarative step here for populating the DB with movies.
-
 Given /the following movies exist/ do |movies_table|
-  movies_table.hashes.each do |movie|
-    Movie.create!
-  end
+    Movie.create!(movies_table.hashes)
+    step("there should be #{movies_table.hashes.length} movies")
 end
 
-# Make sure that one string (regexp) occurs before or after another one
-#   on the same page
+Then /^there should be (.*) movies$/ do |num|
+	assert_equal num.to_i, Movie.count
+end
 
 Then /I should see "(.*)" before "(.*)"/ do |e1, e2|
-  #  ensure that that e1 occurs before e2.
-  #  page.body is the entire content of the page as a string.
-  flunk "Unimplemented"
+  #debugger
+  if page.respond_to? :should
+    page.should have_content(e1)
+    page.should have_content(e2)
+  else
+    assert page.has_content?(e1)
+    assert page.has_content?(e2)    
+  end
+  debugger
+  first = page.body.index(e1)
+  second = page.body.index(e2)
+  first.should < second
 end
-
-# Make it easier to express checking or unchecking several boxes at once
-#  "When I uncheck the following ratings: PG, G, R"
-#  "When I check the following ratings: G"
 
 When /I (un)?check the following ratings: (.*)/ do |uncheck, rating_list|
   rating_list.split(%r{,\s*}).each do |rating|
 		if uncheck
-			step(%Q{uncheck "ratings[#{rating.chomp("'").reverse.chomp("'").reverse}]"})
+			step(%Q{uncheck "ratings[#{rating}]"}) #.chomp("'").reverse.chomp("'").reverse}]"})
 		else
-			step(%Q{check "ratings[#{rating.chomp("'").reverse.chomp("'").reverse}]"})
+			step(%Q{check "ratings[#{rating}]"}) #.chomp("'").reverse.chomp("'").reverse}]"})
 		end
 	end
 end
-  
-  # HINT: use String#split to split up the rating_list, then
-  #   iterate over the ratings and reuse the "When I check..." or
-  #   "When I uncheck..." steps in lines 89-95 of web_steps.rb
 
 
 Then /I should see all the movies/ do
-  # Make sure that all the movies in the app are visible in the table
-  flunk "Unimplemented"
+	rows = Movie.count
+	if rows != nil
+		rows.should == 10
+	end  
 end

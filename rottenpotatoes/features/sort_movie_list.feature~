@@ -44,11 +44,13 @@ Scenario Outline: sort movies in increasing order of release date
 	
 	Examples:
 	| first 								    | second 										|
-	| "2001: A Space Odyssey"   | "Raiders of the Lost Ark"	|
-	| "Raiders of the Lost Ark" | "The Terminator"					|
-	| "When Harry Met Sally"    | "Aladdin"			 						|
-	| "Aladdin"							    | "Chicken Run"  						|
-	| "Chicken Run"					    | "Chocolat"								|
-	| "Chocolat"								| "Amelie"  								|
-	| "Amelie"								  | "The Incredibles"					|
-	| "The Incredibles"				  | "The Help"								|
+	| "2001: A Space Odyssey"   | "Aladdin" 								|
+	| "Aladdin"							    | "Amelie"  								|
+	| "Amelie"							    | "Chicken Run" 						|
+	| "Chicken Run"					    | "Chocolat"	  						|
+	| "Chocolat"						    | "Raiders of the Lost Ark" |
+	| "Raiders of the Lost Ark" | "The Help" 								|
+	| "The Help"							  | "The Incredibles"					|
+	| "The Incredibles"				  | "The Terminator"					|
+	| "The Terminator"				  | "When Harry Met Sally"		|
+	
